@@ -13,7 +13,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFyayIsInN1YiI6MSwiaWF0IjoxNjgzNjk0ODM5LCJleHAiOjE2ODM2OTU3Mzl9.wl7V-N4_6mWTADlPUjmRuXUA9_tyMbJK92Ic4ceHXp8",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoidG9tQGdtYWlsLmNvbSIsInR5cGUiOiJ1c2VyIiwiaWF0IjoxNjgzNzE1MTA2LCJleHAiOjE2ODM3MTYwMDZ9.8sD3AT5gy5geg-JvkN726djj9Xh_wwfv0yxZSwZvfdk",
 							"type": "string"
 						}
 					]
@@ -21,14 +21,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/users",
+					"raw": "http://localhost:3000/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"users"
+						""
 					]
 				}
 			},
@@ -41,7 +41,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"mark@email.com\",\r\n    \"password\":\"123\"\r\n}",
+					"raw": "{\r\n    \"email\":\"tom@gmail.com\",\r\n    \"password\":\"123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
