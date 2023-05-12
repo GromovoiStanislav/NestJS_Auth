@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  username    String @unique
+  password    String
+  fullName    String
+  salary      String
+  contactInfo String
+
+  departmentsLink UserDepartmentLink[]
+}
+
+model Department {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String @unique
+
+  usersLink UserDepartmentLink[]
+}
+
+model UserDepartmentLink {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  role      UserRoles @default(USER) // USER, ADMIN, MANAGER
+  jobTitle String
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  departmentId Int
+  department   Department @relation(fields: [departmentId], references: [id])
+
+  assignedAt DateTime @default(now())
+  assignedBy String
+}
+
+enum UserRoles {
+  USER
+  ADMIN
+  MANAGER
+}
