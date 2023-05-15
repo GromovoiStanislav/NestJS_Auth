@@ -1,4 +1,4 @@
-## NestJS Authentication with JWT access token. (+Observable RxJS)
+## NestJS Authentication with JWT access token. (+Observable RxJS, TypeORM)
 
 ```
 npm install --save @nestjs/passport @nestjs/jwt passport-jwt
