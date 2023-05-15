@@ -1,4 +1,4 @@
-## NestJS Authentication with JWT access anf refresh tokens. And Google Login additionally
+## NestJS Authentication with JWT access and refresh tokens. And Google Login additionally
 
 ```
 npm i googleapis

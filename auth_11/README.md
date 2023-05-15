@@ -9,6 +9,7 @@ npm i -D @types/express-session
 npm i argon2
 ```
 
+## Prisma
 
 ```
 npm i prisma -D
