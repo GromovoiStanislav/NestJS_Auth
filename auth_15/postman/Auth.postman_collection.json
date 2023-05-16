@@ -15,7 +15,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"tom@gmail.com\",\r\n    \"password\":\"123\"\r\n}",
+					"raw": "{\r\n    \"email\":\"tom@nestjs.com\",\r\n    \"password\":\"123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -38,6 +38,38 @@
 			"response": []
 		},
 		{
+			"name": "auth/refresh-tokens",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsInJlZnJlc2hUb2tlbklkIjoiMDFIMEhIOVhHSjFSR1ZGOVNERVlSSEhXSkciLCJpYXQiOjE2ODQyMTU3NTYsImV4cCI6MTY4NDMwMjE1NiwiYXVkIjoibG9jYWxob3N0OjMwMDAiLCJpc3MiOiJsb2NhbGhvc3Q6MzAwMCJ9.vO-5oPrLCpx3BOga7iTxjMJjkHHNsRfFC6lP1019vrE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/refresh-tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"refresh-tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "coffees",
 			"request": {
 				"auth": {
@@ -45,12 +77,41 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVhaWwiOiJ0b21AZ21haWwuY29tIiwiaWF0IjoxNjg0MTUyMzEwLCJleHAiOjE2ODQxNTU5MTAsImF1ZCI6ImxvY2FsaG9zdDozMDAwIiwiaXNzIjoibG9jYWxob3N0OjMwMDAifQ.Jec2fwNHTYCoRnatK5hwf6Dpe-FjhJZHzL5zp-goHkI",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoidG9tQG5lc3Rqcy5jb20iLCJyb2xlIjoiYWRtaW4iLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGVfY29mZmVlIl0sImlhdCI6MTY4NDIzMjQzNiwiZXhwIjoxNjg0MjM2MDM2LCJhdWQiOiJsb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImxvY2FsaG9zdDozMDAwIn0.NJby3zvrYVUxRLz9n8DzaPF_GdWzLQfMVJ8jHjttcW0",
 							"type": "string"
 						}
 					]
 				},
 				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/coffees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"coffees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "coffees",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoidG9tQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInBlcm1pc3Npb25zIjpbImNyZWF0ZV9jb2ZmZWUiXSwiaWF0IjoxNjg0MjI2OTA1LCJleHAiOjE2ODQyMzA1MDUsImF1ZCI6ImxvY2FsaG9zdDozMDAwIiwiaXNzIjoibG9jYWxob3N0OjMwMDAifQ.4_b2NBEjcgQ-gylJjeFoRj2LxwluRq64pZYADj_WNLA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
 				"header": [],
 				"url": {
 					"raw": "http://localhost:3000/coffees",

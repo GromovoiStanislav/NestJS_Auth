@@ -11,6 +11,12 @@ import { ConfigModule } from "@nestjs/config";
 import { APP_GUARD } from "@nestjs/core";
 import { AuthenticationGuard } from "./authentication/guards/authentication.guard";
 import { AccessTokenGuard } from "./authentication/guards/access-token.guard";
+import { RefreshTokenIdsStorage } from "./authentication/refresh-token-ids.storage";
+import { RolesGuard } from "./authorization/guards/roles.guard";
+import { PermissionsGuard } from "./authorization/guards/permissions.guard";
+import { PolicyHandlerStorage } from "./authorization/policies/policy-handlers.storage";
+import { FrameworkContributorPolicyHandler } from "./authorization/policies/framework-contributor.policy";
+import { PoliciesGuard } from "./authorization/guards/policies.guard";
 
 @Module({
   imports: [
@@ -27,8 +33,24 @@ import { AccessTokenGuard } from "./authentication/guards/access-token.guard";
       provide: APP_GUARD,
       useClass: AuthenticationGuard
     },// globally !!!
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard
+    },// globally !!!
+    // NOTE: or role or permissions !!!
+    {
+      provide: APP_GUARD,
+      useClass: PermissionsGuard
+    },// globally !!!
+    {
+      provide: APP_GUARD,
+      useClass: PoliciesGuard
+    },// globally !!!
     AccessTokenGuard,
-    AuthenticationService
+    RefreshTokenIdsStorage,
+    AuthenticationService,
+    PolicyHandlerStorage,
+    FrameworkContributorPolicyHandler
   ],
   controllers: [AuthenticationController]
 })

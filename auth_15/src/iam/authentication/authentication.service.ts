@@ -8,6 +8,10 @@ import { SignInDto } from "./dto/sign-in.dto";
 import { JwtService } from "@nestjs/jwt";
 import jwtConfig from "../config/jwt.config";
 import { ConfigType } from "@nestjs/config";
+import { ActiveUserData } from "../interfaces/active-user-data.interface";
+import { RefreshTokenDto } from "./dto/refresh-token.dto";
+import { InvalidatedRefreshTokenError, RefreshTokenIdsStorage } from "./refresh-token-ids.storage";
+import { ulid } from "ulid";
 
 @Injectable()
 export class AuthenticationService {
@@ -15,6 +19,7 @@ export class AuthenticationService {
   constructor(
     @InjectRepository(User) private usersRepository: Repository<User>,
     private hashingService: HashingService,
+    private refreshTokenIdsStorage: RefreshTokenIdsStorage,
     private jwtService: JwtService,
     @Inject(jwtConfig.KEY) private jwtConfiguration: ConfigType<typeof jwtConfig>
   ) {
@@ -47,18 +52,69 @@ export class AuthenticationService {
     if (!isEqual) {
       throw new UnauthorizedException("password does not match");
     }
+    return await this.generateTokens(user);
+  }
+
+
+  async refreshToken(refreshTokenDto: RefreshTokenDto) {
+    try {
+      const { sub, refreshTokenId } = await this.jwtService.verifyAsync
+      < Pick<ActiveUserData, "sub"> & { refreshTokenId: string } >
+      (
+        refreshTokenDto.refreshToken, {
+          secret: this.jwtConfiguration.secret,
+          audience: this.jwtConfiguration.audience,
+          issuer: this.jwtConfiguration.issuer
+        }
+      );
+      const user = await this.usersRepository.findOneByOrFail({ id: sub });
+      const isValid = await this.refreshTokenIdsStorage.validate(user.id, refreshTokenId);
+      //if (isValid) {
+      await this.refreshTokenIdsStorage.invalidate(user.id);
+      // } else {
+      //   throw new UnauthorizedException('Refresh token is invalid');
+      // }
+      return await this.generateTokens(user);
+    } catch (err) {
+      if (err instanceof InvalidatedRefreshTokenError) {
+        throw new UnauthorizedException("Access denied");
+      }
+      throw new UnauthorizedException();
+    }
+  }
+
+
+  private async generateTokens(user: User) {
+    const refreshTokenId = ulid();
+    const [accessToken, refreshToken] = await Promise.all(
+      [
+        this.signToken<Partial<ActiveUserData>>(
+          user.id,
+          this.jwtConfiguration.accessTokenTtl,
+          { email: user.email, role: user.role, permissions: user.permissions }),
+        this.signToken(
+          user.id,
+          this.jwtConfiguration.refreshTokenTtl,
+          { refreshTokenId })
+      ]
+    );
+    await this.refreshTokenIdsStorage.insert(user.id, refreshTokenId);
+    return { accessToken, refreshToken };
+  }
+
+  private async signToken<T>(userId: number, expiresIn: number, payload?: T) {
     return this.jwtService.signAsync(
       {
-        sub: user.id,
-        eail: user.email
+        sub: userId,
+        ...payload
       },
       {
         secret: this.jwtConfiguration.secret,
         audience: this.jwtConfiguration.audience,
         issuer: this.jwtConfiguration.issuer,
-        expiresIn: this.jwtConfiguration.accessTokenTtl
+        expiresIn
       }
-    ) ;
+    );
   }
 
 }
