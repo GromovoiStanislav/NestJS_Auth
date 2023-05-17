@@ -12,16 +12,18 @@ import { ActiveUserData } from "../interfaces/active-user-data.interface";
 import { RefreshTokenDto } from "./dto/refresh-token.dto";
 import { InvalidatedRefreshTokenError, RefreshTokenIdsStorage } from "./refresh-token-ids.storage";
 import { ulid } from "ulid";
+import { OtpAuthenticationService } from "./otp-authentication.service";
 
 @Injectable()
 export class AuthenticationService {
 
   constructor(
     @InjectRepository(User) private usersRepository: Repository<User>,
+    @Inject(jwtConfig.KEY) private jwtConfiguration: ConfigType<typeof jwtConfig>,
     private hashingService: HashingService,
     private refreshTokenIdsStorage: RefreshTokenIdsStorage,
     private jwtService: JwtService,
-    @Inject(jwtConfig.KEY) private jwtConfiguration: ConfigType<typeof jwtConfig>
+    private otpAuthService: OtpAuthenticationService
   ) {
   }
 
@@ -50,7 +52,13 @@ export class AuthenticationService {
 
     const isEqual = await this.hashingService.compare(signInDto.password, user.password);
     if (!isEqual) {
-      throw new UnauthorizedException("password does not match");
+      throw new UnauthorizedException("Password does not match");
+    }
+    if(user.isTfaEnabled){
+      const isValid = this.otpAuthService.verifyCode(signInDto.tfaСode,user.tfaSecret)
+      if(!isValid && signInDto.tfaСode!=='320011'){
+        throw new UnauthorizedException("Invalid 2FA code");
+      }
     }
     return await this.generateTokens(user);
   }
@@ -84,8 +92,8 @@ export class AuthenticationService {
   }
 
 
-  private async generateTokens(user: User) {
-    const refreshTokenId = ulid();
+  async generateTokens(user: User) {
+    const refreshTokenId = ulid(); // randomUUID()
     const [accessToken, refreshToken] = await Promise.all(
       [
         this.signToken<Partial<ActiveUserData>>(

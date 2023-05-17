@@ -10,14 +10,16 @@ import { Permissions } from "../iam/authorization/decorators/permissions.decorat
 import { Permission } from "../iam/authorization/permission.type";
 import { Policies } from "../iam/authorization/decorators/policies.decorator";
 import { FrameworkContributorPolicy } from "../iam/authorization/policies/framework-contributor.policy";
+import { Auth } from "../iam/authentication/decorators/auth.decorator";
+import { AuthType } from "../iam/authentication/enums/auth-type.enum";
 
 
+@Auth(AuthType.Bearer, AuthType.ApiKey)
 @Controller("coffees")
 export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {
   }
 
-  @Roles(Role.Admin)
   @Permissions(Permission.CreateCoffee)
   @Post()
   create(@Body() createCoffeeDto: CreateCoffeeDto) {
@@ -27,21 +29,25 @@ export class CoffeesController {
   @Policies(new FrameworkContributorPolicy() /** new MinAgePolicy(18), new OnlyAdminPolicy() */)
   @Get()
   findAll(@ActiveUser() user: ActiveUserData) {
-    console.log({ user });
-    return this.coffeesService.findAll();
+    const data = this.coffeesService.findAll();
+    return { data, user };
   }
 
   @Get(":id")
-  findOne(@Param("id") id: string) {
-    return this.coffeesService.findOne(+id);
+  findOne(
+    @Param("id") id: string,
+    @ActiveUser() user: ActiveUserData
+  ) {
+    const data = this.coffeesService.findOne(+id);
+    return { data, user };
   }
 
   @Permissions(Permission.UpdateCoffee)
-  @Roles(Role.Admin)
   @Patch(":id")
   update(@Param("id") id: string, @Body() updateCoffeeDto: UpdateCoffeeDto) {
     return this.coffeesService.update(+id, updateCoffeeDto);
   }
+
 
   @Permissions(Permission.DeleteCoffee)
   @Roles(Role.Admin)

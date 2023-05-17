@@ -15,7 +15,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"tom@nestjs.com\",\r\n    \"password\":\"123\"\r\n}",
+					"raw": "{\r\n    \"email\":\"tom@nestjs.com\",\r\n    \"password\":\"123\",\r\n    \"tfaСode\":\"320011\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -32,6 +32,37 @@
 					"path": [
 						"auth",
 						"sign-in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth/2fa/generate",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoidG9tQG5lc3Rqcy5jb20iLCJyb2xlIjoiYWRtaW4iLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGVfY29mZmVlIl0sImlhdCI6MTY4NDMyMTYxNCwiZXhwIjoxNjg0MzI1MjE0LCJhdWQiOiJsb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImxvY2FsaG9zdDozMDAwIn0.-kIMp2kwLTpRT2ky5iWUjtUa_nlIoqXqeMnlMZadWWQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/auth/2fa/generate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"2fa",
+						"generate"
 					]
 				}
 			},
@@ -64,6 +95,35 @@
 					"path": [
 						"auth",
 						"refresh-tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "coffees/:id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "ApiKey cmFuZG9tX3V1aWQgMDFIME1DRFRRN1NBNDBBSEg4S0dGRFY2MUg=",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/coffees/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"coffees",
+						"10"
 					]
 				}
 			},
