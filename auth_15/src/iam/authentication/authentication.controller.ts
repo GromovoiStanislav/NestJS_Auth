@@ -76,9 +76,9 @@ export class AuthenticationController {
     @Res() response: Response
   ) {
     const { secret, uri } = this.otpAuthService.generateSecret(user.email);
-    await this.otpAuthService.enableTfaForUser(user.email,secret)
-    response.type("png")
-    return toFileStream(response,uri)
+    await this.otpAuthService.enableTfaForUser(user.email, secret);
+    response.type("png");
+    return toFileStream(response, uri);
   }
 
 }

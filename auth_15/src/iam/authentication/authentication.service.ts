@@ -54,9 +54,9 @@ export class AuthenticationService {
     if (!isEqual) {
       throw new UnauthorizedException("Password does not match");
     }
-    if(user.isTfaEnabled){
-      const isValid = this.otpAuthService.verifyCode(signInDto.tfaСode,user.tfaSecret)
-      if(!isValid && signInDto.tfaСode!=='320011'){
+    if (user.isTfaEnabled) {
+      const isValid = this.otpAuthService.verifyCode(signInDto.tfaСode, user.tfaSecret);
+      if (!isValid && signInDto.tfaСode !== "320011") {
         throw new UnauthorizedException("Invalid 2FA code");
       }
     }

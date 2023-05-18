@@ -15,7 +15,7 @@ export class OtpAuthenticationService {
   ) {
   }
 
-   generateSecret(email: string) {
+  generateSecret(email: string) {
     const secret = authenticator.generateSecret();
     const appName = this.configService.getOrThrow("TFA_APP_NAME");
     const uri = authenticator.keyuri(email, appName, secret);

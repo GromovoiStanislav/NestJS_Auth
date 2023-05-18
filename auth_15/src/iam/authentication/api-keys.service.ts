@@ -10,7 +10,9 @@ export interface GeneratedApiKeyPayload {
 @Injectable()
 export class ApiKeysService {
 
-  constructor(private readonly hashingService: HashingService) {
+  constructor(
+    private readonly hashingService: HashingService
+  ) {
   }
 
   async createAndHash(id: number): Promise<GeneratedApiKeyPayload> {

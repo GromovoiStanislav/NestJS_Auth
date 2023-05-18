@@ -6,6 +6,75 @@
 	},
 	"item": [
 		{
+			"name": "auth/session/sign-in",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"tom@nestjs.com\",\r\n    \"password\":\"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/session/sign-in",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"session",
+						"sign-in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth/session/hello",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"tom@nestjs.com\",\r\n    \"password\":\"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/session/hello",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"session",
+						"hello"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "auth/sign-in",
 			"request": {
 				"auth": {
@@ -45,7 +114,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoidG9tQG5lc3Rqcy5jb20iLCJyb2xlIjoiYWRtaW4iLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGVfY29mZmVlIl0sImlhdCI6MTY4NDMyMTYxNCwiZXhwIjoxNjg0MzI1MjE0LCJhdWQiOiJsb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImxvY2FsaG9zdDozMDAwIn0.-kIMp2kwLTpRT2ky5iWUjtUa_nlIoqXqeMnlMZadWWQ",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoidG9tQG5lc3Rqcy5jb20iLCJyb2xlIjoiYWRtaW4iLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGVfY29mZmVlIl0sImlhdCI6MTY4NDM4MzkwMSwiZXhwIjoxNjg0Mzg3NTAxLCJhdWQiOiJsb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImxvY2FsaG9zdDozMDAwIn0.an1XiP-ubNTKXbn8ffSZx14vqLWBoK43-DcaRKxxh-M",
 							"type": "string"
 						}
 					]
