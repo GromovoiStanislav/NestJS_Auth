@@ -42,7 +42,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmlhIiwic3ViIjoyLCJpYXQiOjE2ODQ0NzA0NTIsImV4cCI6MTY4NDQ3MTM1Mn0.-4zML1wii3zPwLVghuvO8WGWHinTdDlNOm9J1lH_m6w",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmlhIiwic3ViIjoyLCJwZXJtaXNzaW9ucyI6WyJyZWFkOmNhdHMiXSwiaWF0IjoxNjg0NDc4MjgxLCJleHAiOjE2ODQ0NzkxODF9.rXC9iJ3AN6D8lbIZpPVqyQETlFQxkAVwavaNpIR9SqQ",
 							"type": "string"
 						}
 					]
@@ -58,6 +58,35 @@
 					"port": "3000",
 					"path": [
 						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/ cats",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmlhIiwic3ViIjoyLCJwZXJtaXNzaW9ucyI6WyJyZWFkOmNhdHMiXSwiaWF0IjoxNjg0NDc4MjgxLCJleHAiOjE2ODQ0NzkxODF9.rXC9iJ3AN6D8lbIZpPVqyQETlFQxkAVwavaNpIR9SqQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/cats",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"cats"
 					]
 				}
 			},

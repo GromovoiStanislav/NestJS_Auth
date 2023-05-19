@@ -24,7 +24,8 @@ export class AuthService {
 
       return {
         username: payload.username,
-        userId: payload.sub
+        userId: payload.sub,
+        permissions: payload.permissions
       };
 
     } catch {
@@ -35,13 +36,15 @@ export class AuthService {
 
   async signIn(username: string, pass: string): Promise<any> {
     const user = await this.usersService.findOne(username);
-    if (!user || user?.password !== pass) {
+
+    if (!user || user.password !== pass) {
       throw new UnauthorizedException();
     }
 
     const payload = {
       username: user.username,
-      sub: user.userId
+      sub: user.userId,
+      permissions: user.permissions
     };
 
     return {
