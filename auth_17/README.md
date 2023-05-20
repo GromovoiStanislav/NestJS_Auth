@@ -1,4 +1,4 @@
-## NestJS JWT API (TypeORM)
+## NestJS Auth JWT & RBAC (TypeORM)
 
 In this we create a DatabaseModule based on the TypeORM
 
