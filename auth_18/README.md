@@ -1,4 +1,4 @@
-## NestJS full authentication system with roles, sessions and email verification (+TypeORM with MongoDB)
+## NestJS Authentication with JWT and email verification (+TypeORM with MongoDB, e2e-tests) 
 
 ```
 npm i @nestjs/passport @nestjs/jwt passport-jwt

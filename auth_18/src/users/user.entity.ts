@@ -3,8 +3,8 @@ import {
   Column,
   BeforeInsert,
   ObjectIdColumn,
-  BeforeUpdate,
-} from 'typeorm';
+  BeforeUpdate, ObjectId
+} from "typeorm";
 import { IsEmail } from 'class-validator';
 import * as bcrypt from 'bcrypt';
 import { UserRoles } from '../shared/user-roles';
@@ -12,7 +12,7 @@ import { UserRoles } from '../shared/user-roles';
 @Entity('user')
 export class UserEntity {
   @ObjectIdColumn()
-  _id: number;
+  _id: ObjectId;
 
   @Column()
   username: string;
@@ -33,6 +33,14 @@ export class UserEntity {
   @BeforeInsert()
   @BeforeUpdate()
   async hashPassword() {
-    this.password = await bcrypt.hash(this.password, 10);
+    // Чтобы избажать повторного хеширования пароля !!!
+    try {
+      const rounds = bcrypt.getRounds(this.password);
+      if (rounds === 0) {
+        this.password = await bcrypt.hash(this.password, 10);
+      }
+    } catch (error) {
+      this.password = await bcrypt.hash(this.password, 10);
+    }
   }
 }

@@ -140,16 +140,15 @@ export class AuthService {
       );
 
       if (userFromDb) {
-        await this.usersService.update(userFromDb._id, {
-          verified: true
-        });
+        //await this.usersService.update(userFromDb._id, { verified: true });
+        userFromDb.verified= true
+        await this.userRepository.save(userFromDb)
 
         await this.emailVerificationRepository.delete({ emailToken: token });
         return true;
       } else {
         throw new HttpException("Invalid token", HttpStatus.FORBIDDEN);
       }
-
 
     } else {
       throw new HttpException("Invalid token", HttpStatus.FORBIDDEN);

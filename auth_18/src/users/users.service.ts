@@ -2,6 +2,7 @@ import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { UserEntity } from "./user.entity";
 import { Repository } from "typeorm";
+import { ObjectId } from 'mongodb';
 import { User } from "./user.interface";
 import { UpdateUserDto } from "./dto/update-user.dto";
 
@@ -22,28 +23,29 @@ export class UsersService {
     return await this.userRepository.findOneBy({ email });
   }
 
-  async update(id: number , newUser: UpdateUserDto) {
-    const user = await this.userRepository.findOneBy({ _id: id });
-    const userWithEmail = await this.userRepository.findOneBy({
-      email: newUser.email
-    });
+  async findOneById(id): Promise<User> {
+    return await this.userRepository.findOneBy({_id: new ObjectId(id) });
+  }
 
-    if (user === undefined || user === null) {
+
+  async update(id: string , newUser: UpdateUserDto): Promise<User> {
+    const user = await this.userRepository.findOneBy({ _id: new ObjectId(id) });
+    const userWithEmail = await this.userRepository.findOneBy({ email: newUser.email });
+
+    if (!user) {
       throw new HttpException("User doesn't exists", HttpStatus.BAD_REQUEST);
     } else if (
-      userWithEmail !== null &&
-      userWithEmail !== undefined &&
-      newUser.email !== user.email
+      userWithEmail && newUser.email !== user.email
     ) {
       throw new HttpException("Email is already used", HttpStatus.BAD_REQUEST);
     }
 
     await this.userRepository.merge(user, newUser);
-    return await this.userRepository.save(user);
+    return this.userRepository.save(user);
   }
 
-  async deleteUserById(id: number) {
-    const user = await this.userRepository.findOneBy({ _id: id });
+  async deleteUserById(id: string) {
+    const user= await this.userRepository.findOneBy({ _id: new ObjectId(id) });
 
     if (user === undefined || user === null) {
       throw new HttpException("User doesn't exists", HttpStatus.BAD_REQUEST);

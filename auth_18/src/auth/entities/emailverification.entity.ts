@@ -1,10 +1,10 @@
 import { IsString, IsEmail, IsNotEmpty, IsDate } from "class-validator";
-import { Column, ObjectIdColumn, Entity } from "typeorm";
+import { Column, ObjectIdColumn, Entity, ObjectId } from "typeorm";
 
 @Entity()
 export class EmailVerificationEntity {
   @ObjectIdColumn()
-  _id: number;
+  _id: ObjectId;
 
   @IsString()
   @IsEmail()
