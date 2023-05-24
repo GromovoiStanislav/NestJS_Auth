@@ -1,4 +1,4 @@
-## NestJS Authentication with JWT access token, customize guards. (+TypeORM)
+## NestJS Authentication with JWT access token, customize guards (+TypeORM)
 
 ```
 npm install --save @nestjs/passport passport passport-local
