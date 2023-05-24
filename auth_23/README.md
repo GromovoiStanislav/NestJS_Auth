@@ -1,4 +1,4 @@
-## NestJS Authentication with Session (+Redis, Caching, Task Scheduling, Testing)
+## NestJS Authentication with Session, RBAC (+Redis, Caching, Prisma, Task Scheduling, Testing)
 
 ```
 npm i express-session
