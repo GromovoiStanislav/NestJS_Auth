@@ -1,4 +1,4 @@
-## NestJS Authentication with JWT access token and refresh token (+TESTS)
+## NestJS Authentication with JWT access token and refresh token (+Prisma, tests)
 
 ```
 npm install --save @nestjs/passport @nestjs/jwt passport-jwt

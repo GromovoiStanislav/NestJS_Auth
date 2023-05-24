@@ -1,5 +1,15 @@
 ## NestJS Authentication/Authorization examples
 
+- 1 - Authentication (JwtStrategy), Mongoose
+- 2 - Authentication witn Session
+- 3 - Authentication with JWT
+- 4 - Authorization RBAC
+- 5 - Authentication with JWT (+Prisma)
+- 6 - Authentication with JWT in Cookie or Header
+- 7 - Authentication with JWT
+- 8 - Session with Redis
+- 9 - Authentication with JWT access token and refresh token (+TypeORM)
+- 10 - Authentication with JWT access token and refresh token (+Prisma, tests)
 - 11 - RBAC (Role Based Access Control), ABAC (Attribute Based Access Control)
 - 12 - Authentication with JWT access and refresh tokens. And Google Login additionally
 - 13 - Authentication with JWT access token (+Observable RxJS, TypeORM)

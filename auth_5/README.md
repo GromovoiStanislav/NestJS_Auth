@@ -1,4 +1,4 @@
-## NestJS Authentication with JWT
+## NestJS Authentication with JWT (+Prisma)
 
 ```
 npm install --save @nestjs/passport passport passport-local
