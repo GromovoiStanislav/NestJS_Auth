@@ -24,3 +24,4 @@
 - 22 - Google OAuth20 with JWT
 - 23 - Authentication with Session, RBAC (+Redis, Caching, Prisma, Task Scheduling, Testing)
 - 24 - Authentication with Passport-JWT (+TypeORM, unit-tests)
+- 25 - Authorization with CASL (authorization ABAC library)
