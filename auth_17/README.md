@@ -15,6 +15,8 @@ npm i -D @types/bcrypt
 
 ```
 npm run migration:generate
-npx typeorm migration:create src/migration/insert-roles or npm run migration:create
+npx typeorm migration:create src/migration/insert-roles 
+or 
+npm run migration:create
 npm run migration:run
 ```
