@@ -1,6 +1,6 @@
 ## NestJS Authentication/Authorization examples
 
-- 1 - Authentication (JwtStrategy), Mongoose
+- 1 - Authentication JwtStrategy (+Mongoose)
 - 2 - Authentication witn Session
 - 3 - Authentication with JWT
 - 4 - Authorization RBAC
@@ -25,3 +25,4 @@
 - 23 - Authentication with Session, RBAC (+Redis, Caching, Prisma, Task Scheduling, Testing)
 - 24 - Authentication with Passport-JWT (+TypeORM, unit-tests)
 - 25 - Authorization with CASL (authorization ABAC library)
+- 26 - Authorization with JWT (+Mongo)
