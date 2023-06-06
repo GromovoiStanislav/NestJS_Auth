@@ -26,3 +26,4 @@
 - 24 - Authentication with Passport-JWT (+TypeORM, unit-tests)
 - 25 - Authorization with CASL (authorization ABAC library)
 - 26 - Authorization with JWT (+Mongo)
+- 27 - Authorization, Session with TypeORM, GraphQL Schema first
